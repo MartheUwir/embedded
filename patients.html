@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information Table</title>
+</head>
+<body>
+    <h1>Patient Information Table</h1>
+    <table id="patientTable">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>National ID</th>
+                <th>Heart Rate</th>
+                <th>Body Temperature (°C)</th>
+                <th>Frequent Sickness</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to populate the table with data
+        function populateTable(data) {
+            const tableBody = document.querySelector("#patientTable tbody");
+
+            data.forEach(patient => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = patient.PatientName;
+                row.insertCell(1).textContent = patient.NationalID;
+                row.insertCell(2).textContent = patient.HeartRate;
+                row.insertCell(3).textContent = patient.BodyTemperature;
+                row.insertCell(4).textContent = patient.FrequentSickness;
+            });
+        }
+
+        // Fetch data from the API and populate the table
+        fetch('http://localhost:3000/api/patients')
+            .then(response => response.json())
+            .then(data => {
+                populateTable(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
