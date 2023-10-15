@@ -38,7 +38,7 @@
         }
 
         // Fetch data from the API and populate the table
-        fetch('http://localhost:3000/api/patients')
+        fetch('http://localhost:3001/api/patients')
             .then(response => response.json())
             .then(data => {
                 populateTable(data);
