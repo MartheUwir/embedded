@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = 3009;
+const port = 3000;
 const cors = require("cors");
 const db = require("./db");
 
@@ -14,14 +14,14 @@ app.post("/api/patient", (req, res) => {
 
   // Insert patient data into the database
   const stmt = db.prepare("INSERT INTO patients (PatientName, NationalID, HeartRate, BodyTemperature, FrequentSickness) VALUES (?, ?, ?, ?, ?)");
-  stmt.run(
+        stmt.run(
     patientInfo.PatientName,
     patientInfo.NationalID,
     patientInfo.HeartRate,
     patientInfo.BodyTemperature,
     patientInfo.FrequentSickness
   );
-  stmt.finalize();
+  stmt.finalize();1
 
   res.status(201).json({ message: "Patient data received and stored." });
 });
@@ -40,3 +40,4 @@ app.get("/api/patients", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
